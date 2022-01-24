@@ -1,9 +1,9 @@
 <template>
   <li>
-    <span v-bind:class="{done: todo.completed}">
+    <span :class="{done: todo.completed}">
       <input type="checkbox" v-model="todo.completed"/>
-      <strong>{{index + 1}}</strong>
-      {{todo.title | uppercase}}
+      <strong>{{ index + 1 }}</strong>
+      {{ todo.title | uppercase }}
     </span>
     <button class="rm" v-on:click="$emit('remove-todo', todo.id)">&times;</button>
   </li>
@@ -11,39 +11,42 @@
 
 <script>
 export default {
-  props: {
-    todo: {
-      type: Object,
-      required: true
-    },
-    index: Number
-  },
   filters: {
-    uppercase (value) {
+    uppercase(value) {
       return value.toUpperCase()
+    }
+  },
+  props: {
+    index: Number,
+    todo: {
+      required: true,
+      type: Object
     }
   }
 }
 </script>
 
 <style>
-  li {
-    border: 1px solid #ccc;
-    display: flex;
-    justify-content: space-between;
-    padding: .5rem 2rem;
-    margin-bottom: 1rem;
-  }
-  .rm {
-    background: red;
-    color: #fff;
-    border-radius: 50%;
-    font-weight: bold;
-  }
-  .done {
-    text-decoration: line-through;
-  }
-  input {
-    margin-right: 1rem;
-  }
+input {
+  margin-right: 1rem;
+}
+
+li {
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  padding: .5rem 2rem;
+  margin-bottom: 1rem;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+.rm {
+  background: red;
+  color: #fff;
+  border-radius: 50%;
+  font-weight: bold;
+}
 </style>
